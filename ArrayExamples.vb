@@ -80,15 +80,35 @@
         Dim column As Integer = 3
         Dim formattedString As String
         Dim currentArray(row, column) As Boolean
+        Dim randomColumn As Integer
+        Dim randomRow As Integer
+        ' Initialize the random-number generator.
+        Randomize()
+
+        ' Generate random value between 0 and 3.
+        For i = 1 To 52
+            randomColumn = CInt(Int((4 * Rnd())))
+            randomRow = CInt(Int((13 * Rnd())))
+            If Not currentArray(randomRow, randomColumn) Then
+                currentArray(randomRow, randomColumn) = True
+            Else
+                Console.WriteLine($"Row {randomRow} , Column {randomColumn}")
+            End If
+        Next
 
         For i = 0 To row
             For j = 0 To column
                 formattedString = $" {i},{j} "
-                Console.Write(formattedString.PadLeft(8))
+                'Console.Write(formattedString.PadLeft(8))
+                If currentArray(i, j) Then
+                    Console.Write(" T ")
+                Else
+                    Console.Write(" F ")
+                End If
             Next
             Console.WriteLine()
         Next
-
+        Console.Read()
     End Sub
 
 End Module
